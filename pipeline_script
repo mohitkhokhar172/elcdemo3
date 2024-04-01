@@ -1,0 +1,27 @@
+pipeline {
+    tools {
+        jdk "java11"
+        maven "maven3.6.1"
+    }
+    agent none
+    stages {
+        stage("checkout") {
+            agent any 
+            steps {
+                git "https://github.com/mohitkhokhar172/DevOpsClassCodes.git"
+            }
+        }
+        stage("compile") {
+            agent any
+            steps {
+                sh "mvn compile"
+            }
+        }
+        stage("test") {
+            agent any
+            steps {
+                sh "mvn package"
+            }
+        }
+    }
+}
